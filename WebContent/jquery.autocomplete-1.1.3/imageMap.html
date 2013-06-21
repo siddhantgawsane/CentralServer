@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<script src="/CCPRegistration/jquery.autocomplete-1.1.3/jquery-1.7.2.js"></script>
+<script
+	src="/CCPRegistration/jquery.autocomplete-1.1.3/jquery.maphilight.min.js"></script>
+
+</head>
+<body>
+
+	<p>Click on the sun or on one of the planets to watch it closer:</p>
+	<p>
+	
+		<img src="000000585239RS.jpg" alt="Cued Click Point Image" id="registrationImage"
+			usemap="#cuedclickpointmap">
+
+		<map class="map" name="cuedclickpointmap">
+			<area shape="rect" id="star" coords="0,0,100,100"
+				onclick="fnClick($(this),event);" id="abcd" alt="Sun" />
+			<area shape="rect" coords="100,0,200,100" alt="Sun"
+				onclick="fnClick($(this),event);" href="#" />
+			<area shape="rect" coords="100,0,300,100" alt="Sun"
+				onclick="fnClick($(this),event);" href="#" />
+			<area shape="rect" coords="120,0,160,100" alt="Sun"
+				onclick="fnClick($(this),event);" href="#" />
+			<area shape="rect" coords="160,0,200,100" alt="Sun"
+				onclick="fnClick($(this),event);" href="#" />
+		</map>
+		
+	</p>
+	<script type="text/javascript">
+		$(function() {
+			$('#registrationImage').maphilight();
+		});
+
+		var i = 0;
+		function fnClick(area, e) {
+
+			var data = area.mouseout().data('maphilight') || {}; //
+			if (data.alwaysOn == undefined || data.alwaysOn == 'false') {
+				i++;
+			} else {
+				i--;
+			}
+			if (i > 1) {
+				i--;
+				alert('You can not select more than One Click Point');
+				return;
+			}
+			data.alwaysOn = !data.alwaysOn; // Toggle Action
+			area.data('maphilight', data).trigger('alwaysOn.maphilight');
+
+		}
+		/*
+		 * 
+		 var data = $('#'+area.id).mouseout().data('maphilight') || {};  // 
+		 data.alwaysOn = !data.alwaysOn; 										// Toggle Action
+		 $('#'+area.id).data('maphilight', data).trigger('alwaysOn.maphilight');
+		
+		
+		 $('#star').click(function(e) {
+		 e.preventDefault();
+		 var data = $('#star').mouseout().data('maphilight') || {};  // 
+		 data.alwaysOn = !data.alwaysOn; 										// Toggle Action
+		 $('#star').data('maphilight', data).trigger('alwaysOn.maphilight');
+		 });
+		 */
+	</script>
+</body>
+</html>
+
